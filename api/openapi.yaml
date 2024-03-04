@@ -15,7 +15,22 @@ servers:
         default: username
         description: The namespace of the development service, usually your username.
 
-paths: {}
+paths:
+ /user:
+    post:
+      summary: Add a user
+      description: Add a user by Id
+      operationId: addUser
+      requestBody:
+        description: Add a user to db
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
 
 components:
   securitySchemes:
@@ -23,6 +38,27 @@ components:
       type: apiKey
       in: header
       name: X-Flyt-Api-Key
+  schemas:
+    User:
+      type: object
+      properties:
+        user_id:
+          type: integer
+          format: int64
+          example: 10
+        first_name:
+          type: string
+          example: firstname
+        last_name:
+          type: string
+          example: lastname
+        dob:
+          type: string
+          format: date-time
+        slack_handle:
+          type: string
+          format: binary
+          example: firstname.lastname
 
 security:
   - ApiKeyAuth: []

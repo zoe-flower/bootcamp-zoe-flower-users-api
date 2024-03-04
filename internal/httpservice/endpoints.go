@@ -11,14 +11,21 @@ type HTTPHandler struct {
 	Logger log.Logger
 }
 
-func (h HTTPHandler) UserGet(ctx echo.Context, userId string) error {
-	return echo.NewHTTPError(http.StatusNotFound)
+// EXAMPLES
+
+// func (h HTTPHandler) UserGet(ctx echo.Context, userId string) error {
+// 	return echo.NewHTTPError(http.StatusNotFound)
+// }
+
+// func (h HTTPHandler) UserAdd(ctx echo.Context) error {
+// 	return echo.NewHTTPError(http.StatusNotFound)
+// }
+
+func (h HTTPHandler) AddUser(c_tx echo.Context) error {
+	return echo.NewHTTPError(http.StatusInternalServerError)
 }
 
-func (h HTTPHandler) UserAdd(ctx echo.Context) error {
-	return echo.NewHTTPError(http.StatusNotFound)
-}
-
+// do something here
 type UserRecord struct {
 	Identifier string // Needs to be sentence case for DynamoDB
 

@@ -6,8 +6,10 @@ package httpservice
 import (
 	"bytes"
 	"compress/gzip"
+	"context"
 	"encoding/base64"
 	"fmt"
+	"net/http"
 	"net/url"
 	"path"
 	"strings"
@@ -18,11 +20,26 @@ import (
 )
 
 // ServerInterface represents all server handlers.
-type ServerInterface interface{}
+type ServerInterface interface {
+	// Add a user
+	// (POST /user)
+	AddUser(ctx echo.Context) error
+}
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
 type ServerInterfaceWrapper struct {
 	Handler ServerInterface
+}
+
+// AddUser converts echo context to params.
+func (w *ServerInterfaceWrapper) AddUser(ctx echo.Context) error {
+	var err error
+
+	ctx.Set(ApiKeyAuthScopes, []string{})
+
+	// Invoke the callback with all the unmarshaled arguments
+	err = w.Handler.AddUser(ctx)
+	return err
 }
 
 // This is a simple interface which specifies echo.Route addition functions which
@@ -48,10 +65,34 @@ func RegisterHandlers(router EchoRouter, si ServerInterface) {
 // Registers handlers, and prepends BaseURL to the paths, so that the paths
 // can be served under a prefix.
 func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL string) {
+	wrapper := ServerInterfaceWrapper{
+		Handler: si,
+	}
+
+	router.POST(baseURL+"/user", wrapper.AddUser)
+}
+
+type AddUserRequestObject struct {
+	Body *AddUserJSONRequestBody
+}
+
+type AddUserResponseObject interface {
+	VisitAddUserResponse(w http.ResponseWriter) error
+}
+
+type AddUser200Response struct{}
+
+func (response AddUser200Response) VisitAddUserResponse(w http.ResponseWriter) error {
+	w.WriteHeader(200)
+	return nil
 }
 
 // StrictServerInterface represents all server handlers.
-type StrictServerInterface interface{}
+type StrictServerInterface interface {
+	// Add a user
+	// (POST /user)
+	AddUser(ctx context.Context, request AddUserRequestObject) (AddUserResponseObject, error)
+}
 
 type (
 	StrictHandlerFunc    = strictecho.StrictEchoHandlerFunc
@@ -67,14 +108,47 @@ type strictHandler struct {
 	middlewares []StrictMiddlewareFunc
 }
 
+// AddUser operation middleware
+func (sh *strictHandler) AddUser(ctx echo.Context) error {
+	var request AddUserRequestObject
+
+	var body AddUserJSONRequestBody
+	if err := ctx.Bind(&body); err != nil {
+		return err
+	}
+	request.Body = &body
+
+	handler := func(ctx echo.Context, request interface{}) (interface{}, error) {
+		return sh.ssi.AddUser(ctx.Request().Context(), request.(AddUserRequestObject))
+	}
+	for _, middleware := range sh.middlewares {
+		handler = middleware(handler, "AddUser")
+	}
+
+	response, err := handler(ctx, request)
+
+	if err != nil {
+		return err
+	} else if validResponse, ok := response.(AddUserResponseObject); ok {
+		return validResponse.VisitAddUserResponse(ctx.Response())
+	} else if response != nil {
+		return fmt.Errorf("unexpected response type: %T", response)
+	}
+	return nil
+}
+
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
-	"H4sIAAAAAAAC/6SSQYvcMAyF/4rR2c6m9JbbQOllL4XtobAMxesoG4NjGVtOSQf/96KEDjMDhdIebVnf",
-	"e5LfBRwtiSJGLjBcoKCr2fP24mZccL86Jf+M26nyLCcfYYAZ7YgZNES7IAzwzXwOG5tT8uYZN9DAW5J7",
-	"u7dCa02DjxMJYMTisk/sSUhvROzsksxPwu9ToB+YTS2Yi7HJC8hzwL94t2IuB7Hv+u4DNA2UMEpxgI9d",
-	"3/WgIVmeZaSmr3PC8Ho/4eu5naWchbhX7w1/yTRWJweFcfWZ4oKRQUPNQTbDnMrw9HTr1zz67SbZVgqW",
-	"J8pL52iBph+FXti++/j+vyrlwPxB5BOuGCgJ/N+FzEViUJJ12A7REdddUMNqs7dv4UjS9dmRg8nWwDCA",
-	"gPYg6Qd3X2dU1x5Fk+IZ1XhjWb7JO9SqlmpD2NRGNavfvE6Cd26/AgAA///a8dlg4wIAAA==",
+	"H4sIAAAAAAAC/6RUTW/bOBD9K8TsHiXZ2V3sQTcXRYEglwJpgQJBYFDkyGJKkSw5dKsG+u/FULFjNzEK",
+	"tCdJw3lvPt6jHkH5MXiHjhK0j5DUgKMsrx8TRn6G6ANGMlii2nf86H0cJUELWhLWZEaECmgKCC0kisbt",
+	"YK6gNzHR1skRGYPf5BgsZ5R4Cb8CsvJVDIcvQZKV6vN2kE7bS5WaE/yx+c44GafXGHPCuDX6jOxqfQI1",
+	"jv7/7xlpHOEOI8zzMeS7B1RUIglVjoamW97ussdNMDc4bTIN/GUctDCg1BihgmV4+FS/sxPVm2DqGzzp",
+	"UhYozMxsXO+LLJhUNIGMZ6bOe1JyDPV3j9ve+q8Ya54o1TIYJjJUtvOrvD3GtDCum3VzxYvxAR0ftvBv",
+	"s27WUEGQNJSRVvngGJ/oZVMbrYUUnCO6SVxrKGRR8vG1XhKK5yqI+CVjojdeT8yjvCN0hVKGYI0qmNVD",
+	"Yt6DZ/nt74g9tPDX6tnUqydHrwp12dnFtsgL3T2VNxE1tBQzzhxIwbu0KPfPev1yuNusFKbUZyuOQy3S",
+	"53Fkj50WWto4mALau3M73N3P93wcef3l9LzW++h1Vvwh0O1N9G7k7VSQo2UbEYXUrlan4tY/i9v0bK1g",
+	"JbGjG+VHmKsXQ5HcGbf70yppoblQ5C3u0frA5L9fqH7kO5OCVDgvRTXuS8EK9jIa2dlFvGPaImEvs+Xb",
+	"zERPP4fz7j4MKI4Y4XtBAwp90jLLZBRWIqcsrZ3E5HMUB76Gpb6ffwQAAP//XDBpxGYFAAA=",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file

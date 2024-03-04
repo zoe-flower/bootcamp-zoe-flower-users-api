@@ -21,4 +21,5 @@ For full details, please see the [openapi.yaml](api/openapi.yaml).
 
 | Method | Path | Description |
 | :--: | :-- | :-- |
+| POST | /user | Add a user by Id |
 

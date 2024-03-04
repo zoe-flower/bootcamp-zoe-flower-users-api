@@ -4,11 +4,34 @@
 package clients
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
+	"fmt"
+	"io"
 	"net/http"
 	"net/url"
 	"strings"
+	"time"
+
+	openapi_types "github.com/oapi-codegen/runtime/types"
 )
+
+const (
+	ApiKeyAuthScopes = "ApiKeyAuth.Scopes"
+)
+
+// User defines model for User.
+type User struct {
+	Dob         *time.Time          `json:"dob,omitempty"`
+	FirstName   *string             `json:"first_name,omitempty"`
+	LastName    *string             `json:"last_name,omitempty"`
+	SlackHandle *openapi_types.File `json:"slack_handle,omitempty"`
+	UserId      *int64              `json:"user_id,omitempty"`
+}
+
+// AddUserJSONRequestBody defines body for AddUser for application/json ContentType.
+type AddUserJSONRequestBody = User
 
 // RequestEditorFn  is the function signature for the RequestEditor callback function
 type RequestEditorFn func(ctx context.Context, req *http.Request) error
@@ -82,7 +105,76 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 }
 
 // The interface specification for the client above.
-type ClientInterface interface{}
+type ClientInterface interface {
+	// AddUserWithBody request with any body
+	AddUserWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
+
+	AddUser(ctx context.Context, body AddUserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
+}
+
+func (c *Client) AddUserWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddUserRequestWithBody(c.Server, contentType, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+func (c *Client) AddUser(ctx context.Context, body AddUserJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
+	req, err := NewAddUserRequest(c.Server, body)
+	if err != nil {
+		return nil, err
+	}
+	req = req.WithContext(ctx)
+	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
+		return nil, err
+	}
+	return c.Client.Do(req)
+}
+
+// NewAddUserRequest calls the generic AddUser builder with application/json body
+func NewAddUserRequest(server string, body AddUserJSONRequestBody) (*http.Request, error) {
+	var bodyReader io.Reader
+	buf, err := json.Marshal(body)
+	if err != nil {
+		return nil, err
+	}
+	bodyReader = bytes.NewReader(buf)
+	return NewAddUserRequestWithBody(server, "application/json", bodyReader)
+}
+
+// NewAddUserRequestWithBody generates requests for AddUser with any type of body
+func NewAddUserRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
+	var err error
+
+	serverURL, err := url.Parse(server)
+	if err != nil {
+		return nil, err
+	}
+
+	operationPath := fmt.Sprintf("/user")
+	if operationPath[0] == '/' {
+		operationPath = "." + operationPath
+	}
+
+	queryURL, err := serverURL.Parse(operationPath)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest("POST", queryURL.String(), body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Add("Content-Type", contentType)
+
+	return req, nil
+}
 
 func (c *Client) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
 	for _, r := range c.RequestEditors {
@@ -126,4 +218,63 @@ func WithBaseURL(baseURL string) ClientOption {
 }
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
-type ClientWithResponsesInterface interface{}
+type ClientWithResponsesInterface interface {
+	// AddUserWithBodyWithResponse request with any body
+	AddUserWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AddUserResponse, error)
+
+	AddUserWithResponse(ctx context.Context, body AddUserJSONRequestBody, reqEditors ...RequestEditorFn) (*AddUserResponse, error)
+}
+
+type AddUserResponse struct {
+	Body         []byte
+	HTTPResponse *http.Response
+}
+
+// Status returns HTTPResponse.Status
+func (r AddUserResponse) Status() string {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.Status
+	}
+	return http.StatusText(0)
+}
+
+// StatusCode returns HTTPResponse.StatusCode
+func (r AddUserResponse) StatusCode() int {
+	if r.HTTPResponse != nil {
+		return r.HTTPResponse.StatusCode
+	}
+	return 0
+}
+
+// AddUserWithBodyWithResponse request with arbitrary body returning *AddUserResponse
+func (c *ClientWithResponses) AddUserWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AddUserResponse, error) {
+	rsp, err := c.AddUserWithBody(ctx, contentType, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddUserResponse(rsp)
+}
+
+func (c *ClientWithResponses) AddUserWithResponse(ctx context.Context, body AddUserJSONRequestBody, reqEditors ...RequestEditorFn) (*AddUserResponse, error) {
+	rsp, err := c.AddUser(ctx, body, reqEditors...)
+	if err != nil {
+		return nil, err
+	}
+	return ParseAddUserResponse(rsp)
+}
+
+// ParseAddUserResponse parses an HTTP response from a AddUserWithResponse call
+func ParseAddUserResponse(rsp *http.Response) (*AddUserResponse, error) {
+	bodyBytes, err := io.ReadAll(rsp.Body)
+	defer func() { _ = rsp.Body.Close() }()
+	if err != nil {
+		return nil, err
+	}
+
+	response := &AddUserResponse{
+		Body:         bodyBytes,
+		HTTPResponse: rsp,
+	}
+
+	return response, nil
+}
