@@ -11,7 +11,7 @@ releases:
       - name: app.team
         value: jetc-tooling
       - name: app.flow
-        value: ""
+        value: Undefined
       - name: app.tier
         value: Undefined
       - name: app.in_prod
