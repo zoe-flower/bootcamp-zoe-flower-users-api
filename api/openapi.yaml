@@ -1,0 +1,28 @@
+openapi: 3.0.0
+info:
+  description: 'bootcamp-zoe_flower-users-api'
+  title: 'bootcamp-zoe_flower-users-api'
+  version: '0.0.1'
+servers:
+  - url: https://bootcamp-zoe-flower-users-api.flyt-platform.com
+    description: Production environment
+  - url: https://bootcamp-zoe-flower-users-api.flyt-staging.com
+    description: Staging environment
+  - url: https://bootcamp-zoe-flower-users-api-{namespace}.flyt-dev.com
+    description: Development environment
+    variables:
+      namespace:
+        default: username
+        description: The namespace of the development service, usually your username.
+
+paths: {}
+
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Flyt-Api-Key
+
+security:
+  - ApiKeyAuth: []

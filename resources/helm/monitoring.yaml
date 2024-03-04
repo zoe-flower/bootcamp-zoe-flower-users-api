@@ -1,0 +1,36 @@
+alerting:
+    alerts:
+      - name: service_restart
+        metric: increase(kube_pod_container_status_restarts_total{pod=~"bootcamp-zoe_flower-users-api.*"}[10m])
+            > 0
+        period: 2m
+        summary: bootcamp-zoe_flower-users-api is restarting
+        description: bootcamp-zoe_flower-users-api is restarting
+        severity: critical
+      - name: goroutines_elevated
+        metric: max(go_goroutines{kubernetes_namespace="flyt", app="bootcamp-zoe_flower-users-api"}
+            > 500) by (app)
+        period: 2m
+        summary: bootcamp-zoe_flower-users-api is running with an elevated number
+            of goroutines indicative of a leak
+        description: bootcamp-zoe_flower-users-api is running with an elevated number
+            of goroutines indicative of a leak
+        severity: high
+      - name: http_errors
+        metric: (sum(rate(kong_http_status{service=~"flyt.bootcamp-zoe_flower-users-api.(http|0)|bootcamp-zoe_flower-users-api",
+            code=~"5.*|499"}[10m]) or vector(0)) / sum(rate(kong_http_status{service=~"flyt.bootcamp-zoe_flower-users-api.(http|0)|bootcamp-zoe_flower-users-api"}[10m])))
+            * 100 > 1
+        period: 2m
+        summary: bootcamp-zoe_flower-users-api is sending more than 1% 5XX status
+            code responses
+        description: bootcamp-zoe_flower-users-api is sending more than 1% 5XX status
+            code responses
+        severity: critical
+      - name: http_panics
+        metric: sum(increase(http_requests_panic{app="bootcamp-zoe_flower-users-api"}[10m]))
+            > 0
+        period: 2m
+        summary: bootcamp-zoe_flower-users-api has panics occuring in the HTTP server
+        description: bootcamp-zoe_flower-users-api has panics occuring in the HTTP
+            server
+        severity: critical

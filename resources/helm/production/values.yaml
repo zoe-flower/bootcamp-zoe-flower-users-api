@@ -1,0 +1,24 @@
+http:
+    env_vars:
+        CONFIG_APP_RUN_HTTP: "true"
+ingress:
+    hosts:
+      - bootcamp-zoe_flower-users-api.flyt-platform.com
+    plugins:
+        rate_limiting:
+            redis_host: cache-kong-ingress-primary.resources.flyt-platform.com
+env_vars:
+    AWS_STS_REGIONAL_ENDPOINTS: regional
+    CONFIG_APP_HTTP_HANDLER_TIMEOUT: 5s
+    CONFIG_APP_IN_PROD: "false"
+    CONFIG_APP_SERVICE_HOSTNAME_FORMAT: https://%s.flyt-platform.com
+    CONFIG_APP_TIER: Undefined
+    CONFIG_AWS_ACCOUNT_ID: "470025225193"
+    CONFIG_DYNAMIC_TASK_ARN: arn:aws:states:eu-west-1:470025225193:stateMachine:dev-tool-dynamic-tasks
+    CONFIG_XRAY_DAEMON: udp:xray-daemon.monitoring.svc.cluster.local.:2000 tcp:xray-daemon-proxy.monitoring.svc.cluster.local.:2001
+app:
+    environment: production
+event_bus:
+    bootstrap_servers: ""
+aws:
+    account_id: "470025225193"

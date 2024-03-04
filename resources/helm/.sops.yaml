@@ -1,0 +1,5 @@
+creation_rules:
+- path_regex: staging/secrets\.yaml$
+  kms: 'arn:aws:kms:eu-west-1:364123201955:key/14058684-a9e6-4c37-a1c7-4d20d4ed270d' # sops key
+- path_regex: production/secrets\.yaml$
+  kms: 'arn:aws:kms:eu-west-1:470025225193:key/b7321729-84ad-4277-857d-fe0799807fb3' # sops key

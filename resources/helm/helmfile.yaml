@@ -1,0 +1,69 @@
+releases:
+  - name: bootcamp-zoe_flower-users-api
+    namespace: flyt
+    chart: flyt/service-tool
+    version: 0.15.3
+    set:
+      - name: nameOverride
+        value: bootcamp-zoe_flower-users-api
+      - name: app.name
+        value: bootcamp-zoe_flower-users-api
+      - name: app.team
+        value: jetc-tooling
+      - name: app.flow
+        value: ""
+      - name: app.tier
+        value: Undefined
+      - name: app.in_prod
+        value: "false"
+      - name: image.repository
+        value: 746238309645.dkr.ecr.eu-west-1.amazonaws.com/bootcamp-zoe_flower-users-api
+      - name: ingress.plugins.request_size_limiting.allowed_payload_size
+        value: "1"
+      - name: ingress.plugins.rate_limiting.second
+        value: "5"
+      - name: resources.limits.cpu
+        value: 50m
+      - name: resources.requests.cpu
+        value: 50m
+      - name: resources.limits.memory
+        value: 50Mi
+      - name: resources.requests.memory
+        value: 50Mi
+      - name: http.minReplicas
+        value: "3"
+      - name: http.maxReplicas
+        value: "50"
+    values:
+      - '{{ requiredEnv "PLATFORM_ENVIRONMENT" }}/values.yaml'
+    secrets: []
+  - name: bootcamp-zoe_flower-users-api-monitoring
+    namespace: flyt
+    chart: flyt/monitoring
+    version: 0.2.3
+    set:
+      - name: nameOverride
+        value: bootcamp-zoe_flower-users-api-monitoring
+      - name: app.name
+        value: bootcamp-zoe_flower-users-api
+      - name: app.environment
+        value: '{{ requiredEnv "PLATFORM_ENVIRONMENT" }}'
+      - name: alerting.team
+        value: jetc-tooling
+      - name: alerting.enabled
+        value: "true"
+    values:
+      - monitoring.yaml
+    secrets: []
+  - name: bootcamp-zoe_flower-users-api-dashboard
+    namespace: flyt
+    chart: flyt/dashboards
+    version: 0.2.0
+    set:
+      - name: nameOverride
+        value: bootcamp-zoe_flower-users-api-dashboard
+      - name: targetDirectory
+        value: /services-default
+    values:
+      - '{{ requiredEnv "PLATFORM_ENVIRONMENT" }}/default-dashboard.yaml'
+    secrets: []

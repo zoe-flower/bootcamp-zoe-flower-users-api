@@ -1,0 +1,27 @@
+http:
+    replicaCount: 1
+    env_vars:
+        CONFIG_APP_RUN_HTTP: "true"
+consumer:
+    replicaCount: 1
+ingress:
+    hosts:
+      - bootcamp-zoe_flower-users-api.flyt-staging.com
+    plugins:
+        rate_limiting:
+            redis_host: cache-kong-ingress-primary.resources.flyt-staging.com
+env_vars:
+    AWS_STS_REGIONAL_ENDPOINTS: regional
+    CONFIG_APP_HTTP_HANDLER_TIMEOUT: 5s
+    CONFIG_APP_IN_PROD: "false"
+    CONFIG_APP_SERVICE_HOSTNAME_FORMAT: https://%s.flyt-staging.com
+    CONFIG_APP_TIER: Undefined
+    CONFIG_AWS_ACCOUNT_ID: "364123201955"
+    CONFIG_DYNAMIC_TASK_ARN: arn:aws:states:eu-west-1:364123201955:stateMachine:dev-tool-dynamic-tasks
+    CONFIG_XRAY_DAEMON: udp:xray-daemon.monitoring.svc.cluster.local.:2000 tcp:xray-daemon-proxy.monitoring.svc.cluster.local.:2001
+app:
+    environment: staging
+event_bus:
+    bootstrap_servers: ""
+aws:
+    account_id: "364123201955"
