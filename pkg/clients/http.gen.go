@@ -12,9 +12,6 @@ import (
 	"net/http"
 	"net/url"
 	"strings"
-	"time"
-
-	openapi_types "github.com/oapi-codegen/runtime/types"
 )
 
 const (
@@ -23,11 +20,11 @@ const (
 
 // User defines model for User.
 type User struct {
-	Dob         *time.Time          `json:"dob,omitempty"`
-	FirstName   *string             `json:"first_name,omitempty"`
-	LastName    *string             `json:"last_name,omitempty"`
-	SlackHandle *openapi_types.File `json:"slack_handle,omitempty"`
-	UserId      *int64              `json:"user_id,omitempty"`
+	Dob         *string `json:"dob,omitempty"`
+	FirstName   *string `json:"first_name,omitempty"`
+	LastName    *string `json:"last_name,omitempty"`
+	SlackHandle *string `json:"slack_handle,omitempty"`
+	UserId      *string `json:"user_id,omitempty"`
 }
 
 // AddUserJSONRequestBody defines body for AddUser for application/json ContentType.
@@ -228,6 +225,7 @@ type ClientWithResponsesInterface interface {
 type AddUserResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
+	JSON200      *User
 }
 
 // Status returns HTTPResponse.Status
@@ -274,6 +272,15 @@ func ParseAddUserResponse(rsp *http.Response) (*AddUserResponse, error) {
 	response := &AddUserResponse{
 		Body:         bodyBytes,
 		HTTPResponse: rsp,
+	}
+
+	switch {
+	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
+		var dest User
+		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
+			return nil, err
+		}
+		response.JSON200 = &dest
 	}
 
 	return response, nil

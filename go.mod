@@ -4,7 +4,7 @@ go 1.22.0
 
 require (
 	github.com/aws/aws-xray-sdk-go v1.4.0
-	github.com/flypay/events v1.39.11
+	github.com/flypay/events v1.39.13
 	github.com/flypay/go-kit/v4 v4.114.0
 	github.com/getkin/kin-openapi v0.123.0
 	github.com/getsentry/sentry-go v0.25.0

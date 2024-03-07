@@ -129,8 +129,8 @@ github.com/envoyproxy/go-control-plane v0.9.7/go.mod h1:cwu0lG7PUMfa9snN8LXBig5y
 github.com/envoyproxy/go-control-plane v0.9.9-0.20201210154907-fd9021fe5dad/go.mod h1:cXg6YxExXjJnVBQHBLXeUAgxn2UodCpnH306RInaBQk=
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
-github.com/flypay/events v1.39.11 h1:6Kc/AoNgn2lIjYTleeZO8cSbEtk0omPJM5CMqNp3lWk=
-github.com/flypay/events v1.39.11/go.mod h1:p3IUxD/aseuyhBSyIuERJJWwyQfA7IM1huJVKFmKAyY=
+github.com/flypay/events v1.39.13 h1:8anVRcEijCt5LCJSL48KvdJPsLcpwp0wdEBB8cOwlXU=
+github.com/flypay/events v1.39.13/go.mod h1:p3IUxD/aseuyhBSyIuERJJWwyQfA7IM1huJVKFmKAyY=
 github.com/flypay/go-kit/v4 v4.114.0 h1:rfawD3SIMuIO1bKeBQhG74FF/4cfWVgbycbvs2XuDF4=
 github.com/flypay/go-kit/v4 v4.114.0/go.mod h1:yGLMlU0h/GrRrty+QngXEkU0vOJo2abDl2TNs8yd2Q4=
 github.com/franela/goblin v0.0.0-20200105215937-c9ffbefa60db/go.mod h1:7dvUGVsVBjqR7JHJk0brhHOZYGmfBYOrK0ZhYMEtBr4=

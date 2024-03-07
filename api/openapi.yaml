@@ -31,6 +31,10 @@ paths:
       responses:
         '200':
           description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
 
 components:
   securitySchemes:
@@ -43,9 +47,7 @@ components:
       type: object
       properties:
         user_id:
-          type: integer
-          format: int64
-          example: 10
+          type: string
         first_name:
           type: string
           example: firstname
@@ -54,11 +56,8 @@ components:
           example: lastname
         dob:
           type: string
-          format: date-time
         slack_handle:
           type: string
-          format: binary
-          example: firstname.lastname
-
+          example: firstname
 security:
   - ApiKeyAuth: []
