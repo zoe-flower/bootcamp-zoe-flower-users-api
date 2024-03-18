@@ -1,15 +1,16 @@
 package httpservice
 
 import (
-	"fmt"
 	"net/http"
 
+	"github.com/flypay/go-kit/v4/pkg/eventbus"
 	"github.com/flypay/go-kit/v4/pkg/log"
 	"github.com/labstack/echo/v4"
 )
 
 type HTTPHandler struct {
-	Logger log.Logger
+	Logger   log.Logger
+	Producer eventbus.Producer
 }
 
 // EXAMPLES
@@ -17,37 +18,19 @@ type HTTPHandler struct {
 
 // Add User is the http Handler
 
-// h.Logger.Debugf("add user called with %s", ctx.Request().Method)
-// h.Logger.Printf("hello", ctx.Request().URL.Query().Get("user_id"))
-// h.Logger.Printf("hello", ctx.Bind(user))
-
-// dob := user.Dob
-// firstName := user.FirstName
-// lastName := user.LastName
-// slackHandle := user.SlackHandle
-// userID := user.UserId
-
-// fmt.Println("DOB:", dob)
-// fmt.Println("First Name:", firstName)
-// fmt.Println("Last Name:", lastName)
-// fmt.Println("Slack Handle:", slackHandle)
-// fmt.Println("UserID:", userID)
-
-// logger := log.DefaultLogger
-// logger.Debugf("Storing query results: %v", x)
-// fmt.Print("USER", ctx.ParamValues())
-
 func (h HTTPHandler) AddUser(ctx echo.Context) error {
-	// var user User
-	var user User
-	err := ctx.Bind(&user)
-	if err != nil {
-		print(err, "ERROR!!")
-		fmt.Println("Error parsing JSON:", err)
-		return ctx.String(http.StatusBadRequest, "bad request")
+	var req User
+	// var stopErr protoreflect.ProtoMessage
+	// var stopErr2 context.Context
+	if err := ctx.Bind(&req); err != nil {
+		h.Logger.Errorf("failed to bind user create request: %s", err)
+		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
-	fmt.Printf("%v", user)
-	return ctx.JSON(http.StatusOK, user)
+
+	h.Logger.Infof("received user create request %v", req)
+	// h.Logger.Infof("CONTEXT: %v", ctx)
+	// h.Producer.Emit(stopErr2, stopErr)
+	return echo.NewHTTPError(http.StatusOK)
 }
 
 // do something here

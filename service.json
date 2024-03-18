@@ -16,7 +16,7 @@
     "http_client": false,
     "event_bus": {
         "consumer": false,
-        "producer": false,
+        "producer": true,
         "consumes_topics": null
     },
     "resources": {},

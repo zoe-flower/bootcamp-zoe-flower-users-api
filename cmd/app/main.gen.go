@@ -36,7 +36,7 @@ func main() {
 
 	opts := []runtime.Option{
 		runtime.WithFromENV(),
-		runtime.WithShouldRunProducer(ConnectorDefinition.Identifier != ""),
+		runtime.WithShouldRunProducer(true),
 	}
 
 	cfg, err := runtime.ResolveConfigAndSetDefault(opts...)
@@ -92,6 +92,8 @@ func main() {
 	if err := service.RunService(
 
 		runner.Echo,
+
+		runner.Producer,
 	); err != nil {
 		log.Fatalf("Failed to init service: %+v", err)
 	}

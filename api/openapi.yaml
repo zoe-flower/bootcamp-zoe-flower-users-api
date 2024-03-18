@@ -45,18 +45,24 @@ components:
   schemas:
     User:
       type: object
+      required:
+        - userId
+        - firstName
+        - lastName
+        - dob
+        - slackHandle
       properties:
-        user_id:
+        userId:
           type: string
-        first_name:
+        firstName:
           type: string
           example: firstname
-        last_name:
+        lastName:
           type: string
           example: lastname
         dob:
           type: string
-        slack_handle:
+        slackHandle:
           type: string
           example: firstname
 security:

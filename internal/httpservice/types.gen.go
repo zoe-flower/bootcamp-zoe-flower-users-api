@@ -9,11 +9,11 @@ const (
 
 // User defines model for User.
 type User struct {
-	Dob         *string `json:"dob,omitempty"`
-	FirstName   *string `json:"first_name,omitempty"`
-	LastName    *string `json:"last_name,omitempty"`
-	SlackHandle *string `json:"slack_handle,omitempty"`
-	UserId      *string `json:"user_id,omitempty"`
+	Dob         string `json:"dob"`
+	FirstName   string `json:"firstName"`
+	LastName    string `json:"lastName"`
+	SlackHandle string `json:"slackHandle"`
+	UserId      string `json:"userId"`
 }
 
 // AddUserJSONRequestBody defines body for AddUser for application/json ContentType.
