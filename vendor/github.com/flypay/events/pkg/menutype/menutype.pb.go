@@ -2973,6 +2973,7 @@ type ComboGroup_Pick struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Value:
+	//
 	//	*ComboGroup_Pick_Exactly
 	//	*ComboGroup_Pick_Range
 	Value          isComboGroup_Pick_Value `protobuf_oneof:"value"`
@@ -3171,6 +3172,7 @@ type Modifier_Pick struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Types that are assignable to Value:
+	//
 	//	*Modifier_Pick_Exactly
 	//	*Modifier_Pick_Range
 	Value          isModifier_Pick_Value `protobuf_oneof:"value"`

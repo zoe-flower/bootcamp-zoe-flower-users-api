@@ -214,7 +214,7 @@ type ConnectorConfigField struct {
 	// Deprecated: Do not use.
 	Capabilities   []string     `protobuf:"bytes,7,rep,name=capabilities,proto3" json:"capabilities,omitempty"`
 	CapabilityList []Capability `protobuf:"varint,8,rep,packed,name=capability_list,json=capabilityList,proto3,enum=connector.Capability" json:"capability_list,omitempty"`
-	//repeated attributes necessary to describe a child object
+	// repeated attributes necessary to describe a child object
 	Schema  []*ConnectorConfigField `protobuf:"bytes,9,rep,name=schema,proto3" json:"schema,omitempty"`
 	IsArray bool                    `protobuf:"varint,10,opt,name=is_array,json=isArray,proto3" json:"is_array,omitempty"`
 }

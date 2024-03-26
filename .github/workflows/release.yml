@@ -15,7 +15,7 @@ jobs:
     uses: ./.github/workflows/helper-test-unit.yml
     secrets: inherit
   create-ecr: 
-    uses: flypay/actions-service-tool/.github/workflows/create-ecr.yml@v1.1.1
+    uses: flypay/actions-service-tool/.github/workflows/create-ecr.yml@v1.1.2
   tool_build-amd:
     uses: flypay/actions-service-tool/.github/workflows/build-amd.yml@v1.0.8
     needs: create-ecr
@@ -127,6 +127,7 @@ jobs:
       platform_environment: "staging"
       account_id: "364123201955"
       service_chart_version: "0.15.3"
+      sentry: true
     secrets:
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
@@ -171,6 +172,7 @@ jobs:
       platform_environment: "production"
       account_id: "470025225193"
       service_chart_version: "0.15.3"
+      sentry: true
     secrets:
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
       SENTRY_ORG: ${{ secrets.SENTRY_ORG }}

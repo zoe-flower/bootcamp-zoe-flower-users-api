@@ -33,6 +33,8 @@ const (
 
 	defaultConsumerLagNumberOfMessages = 50
 	defaultConsumerLagTimePeriod       = "2m"
+
+	defaultGoMemLimit = 100
 )
 
 const (
@@ -67,6 +69,7 @@ type Definition struct {
 	DockerGoVersion         string
 	UseGha                  bool
 	IsGhe                   bool
+	DisableSentry           bool
 	ExtraDockerDependencies string
 }
 
@@ -109,6 +112,7 @@ func LoadDefinition(sj *types.ServiceInput) Definition {
 		DockerGoVersion:    dockerGoVersion,
 		UseGha:             sj.UseGha,
 		IsGhe:              sj.IsGhe,
+		DisableSentry:      sj.DisableSentry,
 	}
 
 	// The job-scheduler service requires the curl binary to be available to the service when it runs in production.
@@ -258,6 +262,10 @@ func ApplyDefaults(serviceInput *types.ServiceInput) {
 
 		if serviceInput.HTTPS.MaxReplicas <= 0 {
 			serviceInput.HTTPS.MaxReplicas = defaultHTTPMaxReplicas
+		}
+
+		if serviceInput.HTTPS.GoMemLimit <= 0 {
+			serviceInput.HTTPS.GoMemLimit = defaultGoMemLimit
 		}
 	}
 

@@ -27,18 +27,20 @@ type RestaurantBrandAssociated struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The restaurant identifiers format:
-	// {
-	//   Key: "JE:UK:1234",
-	//   Id: "1234",
-	//   Tenant: "JE:UK"
-	// }
+	//
+	//	{
+	//	  Key: "JE:UK:1234",
+	//	  Id: "1234",
+	//	  Tenant: "JE:UK"
+	//	}
 	Restaurant *Ident `protobuf:"bytes,1,opt,name=restaurant,proto3" json:"restaurant,omitempty"`
 	// The brand identifiers for the restaurant in slug format, e.g.:
-	// {
-	//   Key: "je-uk-mcdonalds",
-	//   Id: "mcdonalds",
-	//   Tenant: "je-uk"
-	// }
+	//
+	//	{
+	//	  Key: "je-uk-mcdonalds",
+	//	  Id: "mcdonalds",
+	//	  Tenant: "je-uk"
+	//	}
 	Brand *Ident `protobuf:"bytes,2,opt,name=brand,proto3" json:"brand,omitempty"`
 }
 

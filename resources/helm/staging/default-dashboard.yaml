@@ -319,7 +319,7 @@ dashboardJson: |
                             "value": [
                                {
                                   "options": {
-                                     "pattern": "bootcamp-zoe_flower-users-api-consumer-sqs-hashed-(.*)",
+                                     "pattern": "bootcamp-zoe-flower-users-api-consumer-sqs-hashed-(.*)",
                                      "result": {
                                         "index": 0,
                                         "text": "$1"
@@ -329,7 +329,7 @@ dashboardJson: |
                                },
                                {
                                   "options": {
-                                     "pattern": "bootcamp-zoe_flower-users-api-(.*)",
+                                     "pattern": "bootcamp-zoe-flower-users-api-(.*)",
                                      "result": {
                                         "index": 1,
                                         "text": "$1"
@@ -3130,8 +3130,8 @@ dashboardJson: |
              {
                 "allValue": null,
                 "current": {
-                   "text": "bootcamp-zoe_flower-users-api",
-                   "value": "bootcamp-zoe_flower-users-api"
+                   "text": "bootcamp-zoe-flower-users-api",
+                   "value": "bootcamp-zoe-flower-users-api"
                 },
                 "hide": 2,
                 "includeAll": false,
@@ -3140,11 +3140,11 @@ dashboardJson: |
                 "name": "service",
                 "options": [
                    {
-                      "text": "bootcamp-zoe_flower-users-api",
-                      "value": "bootcamp-zoe_flower-users-api"
+                      "text": "bootcamp-zoe-flower-users-api",
+                      "value": "bootcamp-zoe-flower-users-api"
                    }
                 ],
-                "query": "bootcamp-zoe_flower-users-api",
+                "query": "bootcamp-zoe-flower-users-api",
                 "refresh": 0,
                 "type": "custom"
              },
@@ -3253,7 +3253,7 @@ dashboardJson: |
           ]
        },
        "timezone": "browser",
-       "title": "bootcamp-zoe_flower-users-api",
-       "uid": "99dad00763feee8b9df43860903b295d",
+       "title": "bootcamp-zoe-flower-users-api",
+       "uid": "e09e18748677c38bfc92707a618f0b66",
        "version": 0
     }

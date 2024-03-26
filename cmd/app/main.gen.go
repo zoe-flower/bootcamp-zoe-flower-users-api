@@ -16,7 +16,7 @@ import (
 	"github.com/flypay/go-kit/v4/pkg/safe"
 	"github.com/flypay/go-kit/v4/pkg/tracing"
 
-	service "github.com/flypay/bootcamp-zoe_flower-users-api/internal/app"
+	service "github.com/flypay/bootcamp-zoe-flower-users-api/internal/app"
 
 	"github.com/aws/aws-xray-sdk-go/xray"
 	"github.com/getsentry/sentry-go"
@@ -53,21 +53,23 @@ func main() {
 		cfg.Tier,
 		cfg.Production,
 	)
-	log.Info("initialised logger")
 
-	if err := sentry.Init(sentry.ClientOptions{
-		Dsn:         cfg.SentryDSN,
-		Release:     cfg.Version,
-		Environment: cfg.Environment,
-	}); err != nil {
-		log.Fatalf("Sentry init failed: %+v", err)
+	// Sentry initialisation can be skipped during the migration process from FLYT Sentry to JET Sentry
+	if !cfg.DisableSentry {
+		if err := sentry.Init(sentry.ClientOptions{
+			Dsn:         cfg.SentryDSN,
+			Release:     cfg.Version,
+			Environment: cfg.Environment,
+		}); err != nil {
+			log.Fatalf("Sentry init failed: %+v", err)
+		}
+		defer sentry.Flush(time.Second * 5)
+		log.SetSentryHook(sentry.CurrentHub().Client())
+
+		defer safe.Recover()
+
+		log.Info("Initialised sentry")
 	}
-	defer sentry.Flush(time.Second * 5)
-	log.SetSentryHook(sentry.CurrentHub().Client())
-
-	defer safe.Recover()
-
-	log.Info("Initialised sentry")
 
 	if err := xray.Configure(xray.Config{
 		DaemonAddr: cfg.XrayDaemon,

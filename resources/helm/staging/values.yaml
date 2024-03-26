@@ -6,7 +6,7 @@ consumer:
     replicaCount: 1
 ingress:
     hosts:
-      - bootcamp-zoe_flower-users-api.flyt-staging.com
+      - bootcamp-zoe-flower-users-api.flyt-staging.com
     plugins:
         rate_limiting:
             redis_host: cache-kong-ingress-primary.resources.flyt-staging.com

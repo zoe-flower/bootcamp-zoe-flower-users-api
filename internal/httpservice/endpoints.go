@@ -3,6 +3,7 @@ package httpservice
 import (
 	"net/http"
 
+	"github.com/flypay/events/pkg/bootcamp"
 	"github.com/flypay/go-kit/v4/pkg/eventbus"
 	"github.com/flypay/go-kit/v4/pkg/log"
 	"github.com/labstack/echo/v4"
@@ -20,16 +21,23 @@ type HTTPHandler struct {
 
 func (h HTTPHandler) AddUser(ctx echo.Context) error {
 	var req User
-	// var stopErr protoreflect.ProtoMessage
-	// var stopErr2 context.Context
 	if err := ctx.Bind(&req); err != nil {
 		h.Logger.Errorf("failed to bind user create request: %s", err)
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
-
 	h.Logger.Infof("received user create request %v", req)
-	// h.Logger.Infof("CONTEXT: %v", ctx)
-	// h.Producer.Emit(stopErr2, stopErr)
+	user := bootcamp.UserCreated{
+		Id:          req.UserId,
+		FirstName:   req.FirstName,
+		LastName:    req.LastName,
+		DateOfBirth: req.Dob,
+		SlackHandle: req.SlackHandle,
+	}
+	err := h.Producer.Emit(ctx.Request().Context(), &user)
+	if err != nil {
+		h.Logger.Errorf("failed to bind user create request: %s", err)
+		return echo.NewHTTPError(http.StatusInternalServerError)
+	}
 	return echo.NewHTTPError(http.StatusOK)
 }
 

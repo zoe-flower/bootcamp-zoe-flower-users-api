@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  description: 'bootcamp-zoe_flower-users-api'
-  title: 'bootcamp-zoe_flower-users-api'
+  description: 'bootcamp-zoe-flower-users-api'
+  title: 'bootcamp-zoe-flower-users-api'
   version: '0.0.1'
 servers:
   - url: https://bootcamp-zoe-flower-users-api.flyt-platform.com
@@ -16,7 +16,7 @@ servers:
         description: The namespace of the development service, usually your username.
 
 paths:
- /user:
+  /user:
     post:
       summary: Add a user
       description: Add a user by Id
@@ -35,7 +35,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-
 components:
   securitySchemes:
     ApiKeyAuth:

@@ -48,6 +48,7 @@ type ServiceInput struct {
 	Production     bool         `json:"production_traffic"`
 	UseGha         bool         `json:"use_gha"`
 	IsGhe          bool         `json:"is_ghe"`
+	DisableSentry  bool         `json:"disable_sentry"`
 }
 
 type EventBus struct {
@@ -217,22 +218,22 @@ type EnvVars struct {
 }
 
 type Helmfile struct {
-	Releases []HelmfileRelease
+	Releases []HelmfileRelease `yaml:"releases,omitempty"`
 }
 
 type HelmfileRelease struct {
-	Name      string
-	Namespace string
-	Chart     string
-	Version   string
-	Set       []HelmfileReleaseValues
-	Values    []string
-	Secrets   []string
+	Name      string                  `yaml:"name,omitempty"`
+	Namespace string                  `yaml:"namespace,omitempty"`
+	Chart     string                  `yaml:"chart,omitempty"`
+	Version   string                  `yaml:"version,omitempty"`
+	Set       []HelmfileReleaseValues `yaml:"set,omitempty"`
+	Values    []string                `yaml:"values,omitempty"`
+	Secrets   []string                `yaml:"secrets,omitempty"`
 }
 
 type HelmfileReleaseValues struct {
-	Name  string
-	Value string
+	Name  string `yaml:"name,omitempty"`
+	Value string `yaml:"value,omitempty"`
 }
 
 type HelmfileValues struct {
@@ -361,6 +362,7 @@ type HTTPS struct {
 	PodResources       PodResources `json:"pod_resources,omitempty"`
 	MinReplicas        int          `json:"min_replicas,omitempty"`
 	MaxReplicas        int          `json:"max_replicas,omitempty"`
+	GoMemLimit         int          `json:"go_memlimit,omitempty"`
 }
 
 type HelmfileMonitoring struct {

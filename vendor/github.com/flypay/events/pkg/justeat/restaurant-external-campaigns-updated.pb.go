@@ -78,9 +78,9 @@ type RestaurantExternalCampaignsUpdated struct {
 	// e.g 2021-05-05T13:01:49.4976625Z
 	Timestamp         string              `protobuf:"bytes,3,opt,name=timestamp,json=Timestamp,proto3" json:"timestamp,omitempty"`
 	ExternalCampaigns []*ExternalCampaign `protobuf:"bytes,4,rep,name=external_campaigns,json=ExternalCampaigns,proto3" json:"external_campaigns,omitempty"`
-	//service name
+	// service name
 	RaisingComponent string `protobuf:"bytes,5,opt,name=raising_component,json=RaisingComponent,proto3" json:"raising_component,omitempty"`
-	//Flyt request id
+	// Flyt request id
 	Conversation string `protobuf:"bytes,6,opt,name=conversation,json=Conversation,proto3" json:"conversation,omitempty"`
 }
 

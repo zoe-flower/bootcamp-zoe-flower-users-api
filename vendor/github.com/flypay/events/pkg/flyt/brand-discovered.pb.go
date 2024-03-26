@@ -27,11 +27,12 @@ type BrandDiscovered struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The brand identifiers in slug format, e.g.
-	// Id: {
-	//   Key: "je-uk-mcdonalds",
-	//   Id: "mcdonalds",
-	//   Tenant: "je-uk"
-	// }
+	//
+	//	Id: {
+	//	  Key: "je-uk-mcdonalds",
+	//	  Id: "mcdonalds",
+	//	  Tenant: "je-uk"
+	//	}
 	Id *Ident `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The name of the brand.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`

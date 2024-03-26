@@ -3,7 +3,7 @@ http:
         CONFIG_APP_RUN_HTTP: "true"
 ingress:
     hosts:
-      - bootcamp-zoe_flower-users-api.flyt-platform.com
+      - bootcamp-zoe-flower-users-api.flyt-platform.com
     plugins:
         rate_limiting:
             redis_host: cache-kong-ingress-primary.resources.flyt-platform.com

@@ -1,5 +1,5 @@
 {
-    "name": "bootcamp-zoe_flower-users-api",
+    "name": "bootcamp-zoe-flower-users-api",
     "https": {
         "enabled": true,
         "type": "api",
@@ -11,7 +11,8 @@
             "memory": "small"
         },
         "min_replicas": 3,
-        "max_replicas": 50
+        "max_replicas": 50,
+        "go_memlimit": 100
     },
     "http_client": false,
     "event_bus": {
@@ -31,12 +32,13 @@
     },
     "team": "jetc-tooling",
     "alerts": [],
-    "dev_tool_version": "4.114.0",
+    "dev_tool_version": "4.117.0",
     "capability_flow": [
         "Undefined"
     ],
     "tier": "Undefined",
     "production_traffic": false,
     "use_gha": true,
-    "is_ghe": false
+    "is_ghe": false,
+    "disable_sentry": false
 }

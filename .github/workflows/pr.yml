@@ -32,7 +32,7 @@ jobs:
     needs: login-to-amazon-ecr
     runs-on: ubuntu-latest
     container:
-      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.114.0
+      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.117.0
       credentials:
         username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
         password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}
@@ -66,7 +66,7 @@ jobs:
     needs: login-to-amazon-ecr
     runs-on: ubuntu-latest
     container:
-      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.114.0
+      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.117.0
       credentials:
         username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
         password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}
@@ -94,7 +94,7 @@ jobs:
     needs: login-to-amazon-ecr
     runs-on: ubuntu-latest
     container:
-      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.114.0
+      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.117.0
       credentials:
         username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
         password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}
@@ -122,7 +122,7 @@ jobs:
     needs: login-to-amazon-ecr
     runs-on: ubuntu-latest
     container:
-      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.114.0
+      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.117.0
       credentials:
         username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
         password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}
@@ -195,7 +195,7 @@ jobs:
     needs: login-to-amazon-ecr
     runs-on: ubuntu-latest
     container:
-      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.114.0
+      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.117.0
       credentials:
         username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
         password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}
@@ -244,7 +244,7 @@ jobs:
     needs: login-to-amazon-ecr
     runs-on: ubuntu-latest
     container:
-      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.114.0
+      image: ${{ needs.login-to-amazon-ecr.outputs.registry }}/go-kit:v4.117.0
       credentials:
         username: ${{ needs.login-to-amazon-ecr.outputs.docker_username }}
         password: ${{ needs.login-to-amazon-ecr.outputs.docker_password }}

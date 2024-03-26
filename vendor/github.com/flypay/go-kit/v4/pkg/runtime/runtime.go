@@ -32,15 +32,16 @@ type InterfaceType struct {
 
 // Config provides a struct of all the environment variables used throughout go-kit
 type Config struct {
-	Environment string `env:"CONFIG_APP_ENVIRONMENT"`
-	ServiceName string `env:"CONFIG_APP_NAME"`
-	Team        string `env:"CONFIG_APP_TEAM"`
-	Flow        string `env:"CONFIG_APP_FLOW"`
-	Tier        string `env:"CONFIG_APP_TIER" envDefault:"Undefined"`
-	Version     string `env:"CONFIG_APP_VERSION" envDefault:"development"`
-	Production  bool   `env:"CONFIG_APP_IN_PROD"`
-	UseGha      bool   `env:"CONFIG_APP_USE_GHA"`
-	IsGhe       bool   `env:"CONFIG_APP_IS_GHE"`
+	Environment   string `env:"CONFIG_APP_ENVIRONMENT"`
+	ServiceName   string `env:"CONFIG_APP_NAME"`
+	Team          string `env:"CONFIG_APP_TEAM"`
+	Flow          string `env:"CONFIG_APP_FLOW"`
+	Tier          string `env:"CONFIG_APP_TIER" envDefault:"Undefined"`
+	Version       string `env:"CONFIG_APP_VERSION" envDefault:"development"`
+	Production    bool   `env:"CONFIG_APP_IN_PROD"`
+	UseGha        bool   `env:"CONFIG_APP_USE_GHA"`
+	IsGhe         bool   `env:"CONFIG_APP_IS_GHE"`
+	DisableSentry bool   `env:"CONFIG_APP_DISABLE_SENTRY"`
 
 	SentryDSN       string `env:"CONFIG_SENTRY_DSN"`
 	XrayDaemon      string `env:"CONFIG_XRAY_DAEMON"`
@@ -206,5 +207,6 @@ func resolveConfigFromServiceJSON(opts *options) (Config, error) {
 	cfg.Production = si.Production
 	cfg.UseGha = si.UseGha
 	cfg.IsGhe = si.IsGhe
+	cfg.DisableSentry = si.DisableSentry
 	return cfg, nil
 }

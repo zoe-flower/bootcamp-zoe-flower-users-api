@@ -6,7 +6,7 @@ updates:
     schedule:
       interval: "weekly"
       day: "sunday"
-      time: "15:31"
+      time: "19:37"
     open-pull-requests-limit: 30
     reviewers:
       - "jetc-tooling"
