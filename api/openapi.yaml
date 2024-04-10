@@ -20,6 +20,7 @@ paths:
     post:
       summary: Add a user
       description: Add a user by Id
+      # matches handler end point name
       operationId: addUser
       requestBody:
         description: Add a user to db

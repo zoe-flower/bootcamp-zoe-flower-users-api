@@ -14,27 +14,25 @@ type HTTPHandler struct {
 	Producer eventbus.Producer
 }
 
-// EXAMPLES
-// echo.NewHTTPError(http.StatusInternalServerError)
-
-// Add User is the http Handler
-
+// the binding takes the queryparams from curl command and binds to context? (CHECK)
+// we create a user object to emit data in the correct format.
+// why is there both User and UserCreated? (CHECK).
 func (h HTTPHandler) AddUser(ctx echo.Context) error {
-	var req User
-	if err := ctx.Bind(&req); err != nil {
+	var u User
+	if err := ctx.Bind(&u); err != nil {
 		h.Logger.Errorf("failed to bind user create request: %s", err)
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
-	h.Logger.Infof("received user create request %v", req)
-	if req.FirstName == "" {
+	h.Logger.Infof("received user create request %v", u)
+	if u.FirstName == "" {
 		return echo.NewHTTPError(http.StatusBadRequest)
 	}
 	user := bootcamp.UserCreated{
-		Id:          req.UserId,
-		FirstName:   req.FirstName,
-		LastName:    req.LastName,
-		DateOfBirth: req.Dob,
-		SlackHandle: req.SlackHandle,
+		Id:          u.UserId,
+		FirstName:   u.FirstName,
+		LastName:    u.LastName,
+		DateOfBirth: u.Dob,
+		SlackHandle: u.SlackHandle,
 	}
 	err := h.Producer.Emit(ctx.Request().Context(), &user)
 	if err != nil {
