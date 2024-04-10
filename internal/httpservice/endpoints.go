@@ -26,6 +26,9 @@ func (h HTTPHandler) AddUser(ctx echo.Context) error {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	h.Logger.Infof("received user create request %v", req)
+	if req.FirstName == "" {
+		return echo.NewHTTPError(http.StatusBadRequest)
+	}
 	user := bootcamp.UserCreated{
 		Id:          req.UserId,
 		FirstName:   req.FirstName,
