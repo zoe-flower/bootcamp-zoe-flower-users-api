@@ -15,18 +15,18 @@ jobs:
     uses: ./.github/workflows/helper-test-unit.yml
     secrets: inherit
   create-ecr: 
-    uses: flypay/actions-service-tool/.github/workflows/create-ecr.yml@v1.1.2
+    uses: flypay/actions-service-tool/.github/workflows/create-ecr.yml@v1.1.5
   tool_build-amd:
-    uses: flypay/actions-service-tool/.github/workflows/build-amd.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/build-amd.yml@v1.1.5
     needs: create-ecr
   tool_build-arm:
-    uses: flypay/actions-service-tool/.github/workflows/build-arm.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/build-arm.yml@v1.1.5
     needs: create-ecr
   tool_build-combine:
     needs:
     - tool_build-amd
     - tool_build-arm
-    uses: flypay/actions-service-tool/.github/workflows/build-combine.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/build-combine.yml@v1.1.5
   test-contract:
     uses: ./.github/workflows/helper-test-contract.yml
     secrets: inherit
@@ -90,7 +90,7 @@ jobs:
     - test-unit
     - can-i-deploy
     - monorepo-tests
-    uses: flypay/actions-service-tool/.github/workflows/resource-creation.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/resource-creation.yml@v1.1.5
     with:
       gha_deploy_role: ${{ vars.STAGING_GHA_DEPLOY_ROLE }}
       team: "jetc-tooling"
@@ -121,7 +121,7 @@ jobs:
   tool_deploy-staging:
     needs:
     - tool_resource-creation-staging
-    uses: flypay/actions-service-tool/.github/workflows/deploy.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/deploy.yml@v1.1.5
     with:
       gha_deploy_role: ${{ vars.STAGING_GHA_DEPLOY_ROLE }}
       platform_environment: "staging"
@@ -135,7 +135,7 @@ jobs:
   tool_resource-creation-production:
     needs:
     - tool_deploy-staging
-    uses: flypay/actions-service-tool/.github/workflows/resource-creation.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/resource-creation.yml@v1.1.5
     with:
       gha_deploy_role: ${{ vars.PRODUCTION_GHA_DEPLOY_ROLE }}
       team: "jetc-tooling"
@@ -166,7 +166,7 @@ jobs:
   tool_deploy-production:
     needs:
     - tool_resource-creation-production
-    uses: flypay/actions-service-tool/.github/workflows/deploy.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/deploy.yml@v1.1.5
     with:
       gha_deploy_role: ${{ vars.PRODUCTION_GHA_DEPLOY_ROLE }}
       platform_environment: "production"

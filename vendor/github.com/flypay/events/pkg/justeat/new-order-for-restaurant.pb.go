@@ -28,7 +28,7 @@ type NewOrderForRestaurant struct {
 	unknownFields protoimpl.UnknownFields
 
 	OrderId            string                                      `protobuf:"bytes,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	OrderReference     int32                                       `protobuf:"varint,2,opt,name=order_reference,json=orderReference,proto3" json:"order_reference,omitempty"`
+	OrderReference     int64                                       `protobuf:"varint,2,opt,name=order_reference,json=orderReference,proto3" json:"order_reference,omitempty"`
 	Status             *NewOrderForRestaurant_Status               `protobuf:"bytes,3,opt,name=status,proto3" json:"status,omitempty"`
 	Currency           string                                      `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
 	PlacedDate         string                                      `protobuf:"bytes,5,opt,name=placed_date,json=placedDate,proto3" json:"placed_date,omitempty"`
@@ -84,7 +84,7 @@ func (x *NewOrderForRestaurant) GetOrderId() string {
 	return ""
 }
 
-func (x *NewOrderForRestaurant) GetOrderReference() int32 {
+func (x *NewOrderForRestaurant) GetOrderReference() int64 {
 	if x != nil {
 		return x.OrderReference
 	}
@@ -244,6 +244,55 @@ func (x *OfferDetail) GetDiscountValue() int32 {
 	return 0
 }
 
+type Sub struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Could be changed to enum of "bestMatch" or "refund" in the future, but for now
+	// JE have requested we map as string, to be tolerant to any changes in future.
+	Pref string `protobuf:"bytes,1,opt,name=pref,proto3" json:"pref,omitempty"`
+}
+
+func (x *Sub) Reset() {
+	*x = Sub{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Sub) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Sub) ProtoMessage() {}
+
+func (x *Sub) ProtoReflect() protoreflect.Message {
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Sub.ProtoReflect.Descriptor instead.
+func (*Sub) Descriptor() ([]byte, []int) {
+	return file_justeat_new_order_for_restaurant_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Sub) GetPref() string {
+	if x != nil {
+		return x.Pref
+	}
+	return ""
+}
+
 type NewOrderForRestaurant_Status struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -255,7 +304,7 @@ type NewOrderForRestaurant_Status struct {
 func (x *NewOrderForRestaurant_Status) Reset() {
 	*x = NewOrderForRestaurant_Status{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[2]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -268,7 +317,7 @@ func (x *NewOrderForRestaurant_Status) String() string {
 func (*NewOrderForRestaurant_Status) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_Status) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[2]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -302,7 +351,7 @@ type NewOrderForRestaurant_RestaurantDetail struct {
 func (x *NewOrderForRestaurant_RestaurantDetail) Reset() {
 	*x = NewOrderForRestaurant_RestaurantDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[3]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -315,7 +364,7 @@ func (x *NewOrderForRestaurant_RestaurantDetail) String() string {
 func (*NewOrderForRestaurant_RestaurantDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_RestaurantDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[3]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -349,7 +398,7 @@ type NewOrderForRestaurant_PaymentDetail struct {
 func (x *NewOrderForRestaurant_PaymentDetail) Reset() {
 	*x = NewOrderForRestaurant_PaymentDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[4]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -362,7 +411,7 @@ func (x *NewOrderForRestaurant_PaymentDetail) String() string {
 func (*NewOrderForRestaurant_PaymentDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_PaymentDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[4]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -401,7 +450,7 @@ type NewOrderForRestaurant_CustomerDetail struct {
 func (x *NewOrderForRestaurant_CustomerDetail) Reset() {
 	*x = NewOrderForRestaurant_CustomerDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[5]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -414,7 +463,7 @@ func (x *NewOrderForRestaurant_CustomerDetail) String() string {
 func (*NewOrderForRestaurant_CustomerDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_CustomerDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[5]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -486,7 +535,7 @@ type NewOrderForRestaurant_FulfilmentDetail struct {
 func (x *NewOrderForRestaurant_FulfilmentDetail) Reset() {
 	*x = NewOrderForRestaurant_FulfilmentDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[6]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -499,7 +548,7 @@ func (x *NewOrderForRestaurant_FulfilmentDetail) String() string {
 func (*NewOrderForRestaurant_FulfilmentDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_FulfilmentDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[6]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -554,7 +603,7 @@ type NewOrderForRestaurant_DineInInfo struct {
 func (x *NewOrderForRestaurant_DineInInfo) Reset() {
 	*x = NewOrderForRestaurant_DineInInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[7]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -567,7 +616,7 @@ func (x *NewOrderForRestaurant_DineInInfo) String() string {
 func (*NewOrderForRestaurant_DineInInfo) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_DineInInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[7]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -601,7 +650,7 @@ type NewOrderForRestaurant_DeliveryInfo struct {
 func (x *NewOrderForRestaurant_DeliveryInfo) Reset() {
 	*x = NewOrderForRestaurant_DeliveryInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[8]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -614,7 +663,7 @@ func (x *NewOrderForRestaurant_DeliveryInfo) String() string {
 func (*NewOrderForRestaurant_DeliveryInfo) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_DeliveryInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[8]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -651,12 +700,13 @@ type NewOrderForRestaurant_OrderItemDetail struct {
 	Items             []*NewOrderForRestaurant_SubItemDetail `protobuf:"bytes,7,rep,name=items,proto3" json:"items,omitempty"`
 	Discounts         []*OfferDetail                         `protobuf:"bytes,8,rep,name=discounts,proto3" json:"discounts,omitempty"`
 	UnitDepositAmount int32                                  `protobuf:"varint,9,opt,name=unit_deposit_amount,json=unitDepositAmount,proto3" json:"unit_deposit_amount,omitempty"`
+	Sub               *Sub                                   `protobuf:"bytes,10,opt,name=sub,proto3" json:"sub,omitempty"`
 }
 
 func (x *NewOrderForRestaurant_OrderItemDetail) Reset() {
 	*x = NewOrderForRestaurant_OrderItemDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[9]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -669,7 +719,7 @@ func (x *NewOrderForRestaurant_OrderItemDetail) String() string {
 func (*NewOrderForRestaurant_OrderItemDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_OrderItemDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[9]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -748,6 +798,13 @@ func (x *NewOrderForRestaurant_OrderItemDetail) GetUnitDepositAmount() int32 {
 	return 0
 }
 
+func (x *NewOrderForRestaurant_OrderItemDetail) GetSub() *Sub {
+	if x != nil {
+		return x.Sub
+	}
+	return nil
+}
+
 type NewOrderForRestaurant_SubItemDetail struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -765,7 +822,7 @@ type NewOrderForRestaurant_SubItemDetail struct {
 func (x *NewOrderForRestaurant_SubItemDetail) Reset() {
 	*x = NewOrderForRestaurant_SubItemDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[10]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -778,7 +835,7 @@ func (x *NewOrderForRestaurant_SubItemDetail) String() string {
 func (*NewOrderForRestaurant_SubItemDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_SubItemDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[10]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -857,7 +914,7 @@ type NewOrderForRestaurant_PriceBreakdownDetail struct {
 func (x *NewOrderForRestaurant_PriceBreakdownDetail) Reset() {
 	*x = NewOrderForRestaurant_PriceBreakdownDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[11]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -870,7 +927,7 @@ func (x *NewOrderForRestaurant_PriceBreakdownDetail) String() string {
 func (*NewOrderForRestaurant_PriceBreakdownDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_PriceBreakdownDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[11]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -928,7 +985,7 @@ type NewOrderForRestaurant_ChargeDetail struct {
 func (x *NewOrderForRestaurant_ChargeDetail) Reset() {
 	*x = NewOrderForRestaurant_ChargeDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[12]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -941,7 +998,7 @@ func (x *NewOrderForRestaurant_ChargeDetail) String() string {
 func (*NewOrderForRestaurant_ChargeDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_ChargeDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[12]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -998,7 +1055,7 @@ type NewOrderForRestaurant_DiscountDetail struct {
 func (x *NewOrderForRestaurant_DiscountDetail) Reset() {
 	*x = NewOrderForRestaurant_DiscountDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[13]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1011,7 +1068,7 @@ func (x *NewOrderForRestaurant_DiscountDetail) String() string {
 func (*NewOrderForRestaurant_DiscountDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_DiscountDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[13]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1061,7 +1118,7 @@ type NewOrderForRestaurant_TipDetail struct {
 func (x *NewOrderForRestaurant_TipDetail) Reset() {
 	*x = NewOrderForRestaurant_TipDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[14]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1074,7 +1131,7 @@ func (x *NewOrderForRestaurant_TipDetail) String() string {
 func (*NewOrderForRestaurant_TipDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_TipDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[14]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1124,7 +1181,7 @@ type NewOrderForRestaurant_CustomerNotesDetail struct {
 func (x *NewOrderForRestaurant_CustomerNotesDetail) Reset() {
 	*x = NewOrderForRestaurant_CustomerNotesDetail{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[15]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1137,7 +1194,7 @@ func (x *NewOrderForRestaurant_CustomerNotesDetail) String() string {
 func (*NewOrderForRestaurant_CustomerNotesDetail) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_CustomerNotesDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[15]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1185,7 +1242,7 @@ type NewOrderForRestaurant_RestrictionsDetails struct {
 func (x *NewOrderForRestaurant_RestrictionsDetails) Reset() {
 	*x = NewOrderForRestaurant_RestrictionsDetails{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[16]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1198,7 +1255,7 @@ func (x *NewOrderForRestaurant_RestrictionsDetails) String() string {
 func (*NewOrderForRestaurant_RestrictionsDetails) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_RestrictionsDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[16]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1233,7 +1290,7 @@ type NewOrderForRestaurant_Location struct {
 func (x *NewOrderForRestaurant_Location) Reset() {
 	*x = NewOrderForRestaurant_Location{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[17]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1246,7 +1303,7 @@ func (x *NewOrderForRestaurant_Location) String() string {
 func (*NewOrderForRestaurant_Location) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_Location) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[17]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1289,7 +1346,7 @@ type NewOrderForRestaurant_Address struct {
 func (x *NewOrderForRestaurant_Address) Reset() {
 	*x = NewOrderForRestaurant_Address{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[18]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1302,7 +1359,7 @@ func (x *NewOrderForRestaurant_Address) String() string {
 func (*NewOrderForRestaurant_Address) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_Address) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[18]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1351,7 +1408,7 @@ type NewOrderForRestaurant_FulfilmentTime struct {
 func (x *NewOrderForRestaurant_FulfilmentTime) Reset() {
 	*x = NewOrderForRestaurant_FulfilmentTime{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[19]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1364,7 +1421,7 @@ func (x *NewOrderForRestaurant_FulfilmentTime) String() string {
 func (*NewOrderForRestaurant_FulfilmentTime) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_FulfilmentTime) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[19]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1406,7 +1463,7 @@ type NewOrderForRestaurant_PhoneNumber struct {
 func (x *NewOrderForRestaurant_PhoneNumber) Reset() {
 	*x = NewOrderForRestaurant_PhoneNumber{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[20]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1419,7 +1476,7 @@ func (x *NewOrderForRestaurant_PhoneNumber) String() string {
 func (*NewOrderForRestaurant_PhoneNumber) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_PhoneNumber) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[20]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1461,7 +1518,7 @@ type NewOrderForRestaurant_Items struct {
 func (x *NewOrderForRestaurant_Items) Reset() {
 	*x = NewOrderForRestaurant_Items{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[21]
+		mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1474,7 +1531,7 @@ func (x *NewOrderForRestaurant_Items) String() string {
 func (*NewOrderForRestaurant_Items) ProtoMessage() {}
 
 func (x *NewOrderForRestaurant_Items) ProtoReflect() protoreflect.Message {
-	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[21]
+	mi := &file_justeat_new_order_for_restaurant_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1513,11 +1570,11 @@ var file_justeat_new_order_for_restaurant_proto_rawDesc = []byte{
 	0x74, 0x1a, 0x15, 0x66, 0x6c, 0x79, 0x74, 0x2f, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74,
 	0x6f, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x15, 0x6a, 0x75, 0x73, 0x74, 0x65, 0x61,
 	0x74, 0x2f, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22,
-	0xef, 0x1c, 0x0a, 0x15, 0x4e, 0x65, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x46, 0x6f, 0x72, 0x52,
+	0x8f, 0x1d, 0x0a, 0x15, 0x4e, 0x65, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x46, 0x6f, 0x72, 0x52,
 	0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x12, 0x19, 0x0a, 0x08, 0x6f, 0x72, 0x64,
 	0x65, 0x72, 0x5f, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x6f, 0x72, 0x64,
 	0x65, 0x72, 0x49, 0x64, 0x12, 0x27, 0x0a, 0x0f, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x72, 0x65,
-	0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x05, 0x52, 0x0e, 0x6f,
+	0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0e, 0x6f,
 	0x72, 0x64, 0x65, 0x72, 0x52, 0x65, 0x66, 0x65, 0x72, 0x65, 0x6e, 0x63, 0x65, 0x12, 0x3d, 0x0a,
 	0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x25, 0x2e,
 	0x6a, 0x75, 0x73, 0x74, 0x65, 0x61, 0x74, 0x2e, 0x4e, 0x65, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72,
@@ -1631,7 +1688,7 @@ var file_justeat_new_order_for_restaurant_proto_rawDesc = []byte{
 	0x0b, 0x32, 0x27, 0x2e, 0x6a, 0x75, 0x73, 0x74, 0x65, 0x61, 0x74, 0x2e, 0x4e, 0x65, 0x77, 0x4f,
 	0x72, 0x64, 0x65, 0x72, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e,
 	0x74, 0x2e, 0x4c, 0x6f, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x08, 0x6c, 0x6f, 0x63, 0x61,
-	0x74, 0x69, 0x6f, 0x6e, 0x1a, 0xe0, 0x02, 0x0a, 0x0f, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x74,
+	0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x80, 0x03, 0x0a, 0x0f, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x49, 0x74,
 	0x65, 0x6d, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65,
 	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x25, 0x0a, 0x0e,
@@ -1653,7 +1710,9 @@ var file_justeat_new_order_for_restaurant_proto_rawDesc = []byte{
 	0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x12, 0x2e, 0x0a, 0x13, 0x75, 0x6e, 0x69, 0x74, 0x5f,
 	0x64, 0x65, 0x70, 0x6f, 0x73, 0x69, 0x74, 0x5f, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x09,
 	0x20, 0x01, 0x28, 0x05, 0x52, 0x11, 0x75, 0x6e, 0x69, 0x74, 0x44, 0x65, 0x70, 0x6f, 0x73, 0x69,
-	0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x1a, 0x89, 0x02, 0x0a, 0x0d, 0x53, 0x75, 0x62, 0x49,
+	0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x03, 0x73, 0x75, 0x62, 0x18, 0x0a,
+	0x20, 0x01, 0x28, 0x0b, 0x32, 0x0c, 0x2e, 0x6a, 0x75, 0x73, 0x74, 0x65, 0x61, 0x74, 0x2e, 0x53,
+	0x75, 0x62, 0x52, 0x03, 0x73, 0x75, 0x62, 0x1a, 0x89, 0x02, 0x0a, 0x0d, 0x53, 0x75, 0x62, 0x49,
 	0x74, 0x65, 0x6d, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d,
 	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x12, 0x25, 0x0a,
@@ -1749,16 +1808,18 @@ var file_justeat_new_order_for_restaurant_proto_rawDesc = []byte{
 	0x28, 0x09, 0x52, 0x07, 0x6f, 0x66, 0x66, 0x65, 0x72, 0x49, 0x64, 0x12, 0x25, 0x0a, 0x0e, 0x64,
 	0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x5f, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20,
 	0x01, 0x28, 0x05, 0x52, 0x0d, 0x64, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x56, 0x61, 0x6c,
-	0x75, 0x65, 0x42, 0x8b, 0x01, 0x0a, 0x0b, 0x63, 0x6f, 0x6d, 0x2e, 0x6a, 0x75, 0x73, 0x74, 0x65,
-	0x61, 0x74, 0x42, 0x1a, 0x4e, 0x65, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x46, 0x6f, 0x72, 0x52,
-	0x65, 0x73, 0x74, 0x61, 0x75, 0x72, 0x61, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01,
-	0x5a, 0x24, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x66, 0x6c, 0x79,
-	0x70, 0x61, 0x79, 0x2f, 0x65, 0x76, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x6a,
-	0x75, 0x73, 0x74, 0x65, 0x61, 0x74, 0xa2, 0x02, 0x03, 0x4a, 0x58, 0x58, 0xaa, 0x02, 0x07, 0x4a,
-	0x75, 0x73, 0x74, 0x65, 0x61, 0x74, 0xca, 0x02, 0x07, 0x4a, 0x75, 0x73, 0x74, 0x65, 0x61, 0x74,
-	0xe2, 0x02, 0x13, 0x4a, 0x75, 0x73, 0x74, 0x65, 0x61, 0x74, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65,
-	0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0xea, 0x02, 0x07, 0x4a, 0x75, 0x73, 0x74, 0x65, 0x61, 0x74,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x75, 0x65, 0x22, 0x19, 0x0a, 0x03, 0x53, 0x75, 0x62, 0x12, 0x12, 0x0a, 0x04, 0x70, 0x72, 0x65,
+	0x66, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x70, 0x72, 0x65, 0x66, 0x42, 0x8b, 0x01,
+	0x0a, 0x0b, 0x63, 0x6f, 0x6d, 0x2e, 0x6a, 0x75, 0x73, 0x74, 0x65, 0x61, 0x74, 0x42, 0x1a, 0x4e,
+	0x65, 0x77, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x46, 0x6f, 0x72, 0x52, 0x65, 0x73, 0x74, 0x61, 0x75,
+	0x72, 0x61, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x24, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x66, 0x6c, 0x79, 0x70, 0x61, 0x79, 0x2f, 0x65,
+	0x76, 0x65, 0x6e, 0x74, 0x73, 0x2f, 0x70, 0x6b, 0x67, 0x2f, 0x6a, 0x75, 0x73, 0x74, 0x65, 0x61,
+	0x74, 0xa2, 0x02, 0x03, 0x4a, 0x58, 0x58, 0xaa, 0x02, 0x07, 0x4a, 0x75, 0x73, 0x74, 0x65, 0x61,
+	0x74, 0xca, 0x02, 0x07, 0x4a, 0x75, 0x73, 0x74, 0x65, 0x61, 0x74, 0xe2, 0x02, 0x13, 0x4a, 0x75,
+	0x73, 0x74, 0x65, 0x61, 0x74, 0x5c, 0x47, 0x50, 0x42, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74,
+	0x61, 0xea, 0x02, 0x07, 0x4a, 0x75, 0x73, 0x74, 0x65, 0x61, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1773,61 +1834,63 @@ func file_justeat_new_order_for_restaurant_proto_rawDescGZIP() []byte {
 	return file_justeat_new_order_for_restaurant_proto_rawDescData
 }
 
-var file_justeat_new_order_for_restaurant_proto_msgTypes = make([]protoimpl.MessageInfo, 22)
+var file_justeat_new_order_for_restaurant_proto_msgTypes = make([]protoimpl.MessageInfo, 23)
 var file_justeat_new_order_for_restaurant_proto_goTypes = []interface{}{
 	(*NewOrderForRestaurant)(nil),                      // 0: justeat.NewOrderForRestaurant
 	(*OfferDetail)(nil),                                // 1: justeat.OfferDetail
-	(*NewOrderForRestaurant_Status)(nil),               // 2: justeat.NewOrderForRestaurant.Status
-	(*NewOrderForRestaurant_RestaurantDetail)(nil),     // 3: justeat.NewOrderForRestaurant.RestaurantDetail
-	(*NewOrderForRestaurant_PaymentDetail)(nil),        // 4: justeat.NewOrderForRestaurant.PaymentDetail
-	(*NewOrderForRestaurant_CustomerDetail)(nil),       // 5: justeat.NewOrderForRestaurant.CustomerDetail
-	(*NewOrderForRestaurant_FulfilmentDetail)(nil),     // 6: justeat.NewOrderForRestaurant.FulfilmentDetail
-	(*NewOrderForRestaurant_DineInInfo)(nil),           // 7: justeat.NewOrderForRestaurant.DineInInfo
-	(*NewOrderForRestaurant_DeliveryInfo)(nil),         // 8: justeat.NewOrderForRestaurant.DeliveryInfo
-	(*NewOrderForRestaurant_OrderItemDetail)(nil),      // 9: justeat.NewOrderForRestaurant.OrderItemDetail
-	(*NewOrderForRestaurant_SubItemDetail)(nil),        // 10: justeat.NewOrderForRestaurant.SubItemDetail
-	(*NewOrderForRestaurant_PriceBreakdownDetail)(nil), // 11: justeat.NewOrderForRestaurant.PriceBreakdownDetail
-	(*NewOrderForRestaurant_ChargeDetail)(nil),         // 12: justeat.NewOrderForRestaurant.ChargeDetail
-	(*NewOrderForRestaurant_DiscountDetail)(nil),       // 13: justeat.NewOrderForRestaurant.DiscountDetail
-	(*NewOrderForRestaurant_TipDetail)(nil),            // 14: justeat.NewOrderForRestaurant.TipDetail
-	(*NewOrderForRestaurant_CustomerNotesDetail)(nil),  // 15: justeat.NewOrderForRestaurant.CustomerNotesDetail
-	(*NewOrderForRestaurant_RestrictionsDetails)(nil),  // 16: justeat.NewOrderForRestaurant.RestrictionsDetails
-	(*NewOrderForRestaurant_Location)(nil),             // 17: justeat.NewOrderForRestaurant.Location
-	(*NewOrderForRestaurant_Address)(nil),              // 18: justeat.NewOrderForRestaurant.Address
-	(*NewOrderForRestaurant_FulfilmentTime)(nil),       // 19: justeat.NewOrderForRestaurant.FulfilmentTime
-	(*NewOrderForRestaurant_PhoneNumber)(nil),          // 20: justeat.NewOrderForRestaurant.PhoneNumber
-	(*NewOrderForRestaurant_Items)(nil),                // 21: justeat.NewOrderForRestaurant.Items
+	(*Sub)(nil),                                        // 2: justeat.Sub
+	(*NewOrderForRestaurant_Status)(nil),               // 3: justeat.NewOrderForRestaurant.Status
+	(*NewOrderForRestaurant_RestaurantDetail)(nil),     // 4: justeat.NewOrderForRestaurant.RestaurantDetail
+	(*NewOrderForRestaurant_PaymentDetail)(nil),        // 5: justeat.NewOrderForRestaurant.PaymentDetail
+	(*NewOrderForRestaurant_CustomerDetail)(nil),       // 6: justeat.NewOrderForRestaurant.CustomerDetail
+	(*NewOrderForRestaurant_FulfilmentDetail)(nil),     // 7: justeat.NewOrderForRestaurant.FulfilmentDetail
+	(*NewOrderForRestaurant_DineInInfo)(nil),           // 8: justeat.NewOrderForRestaurant.DineInInfo
+	(*NewOrderForRestaurant_DeliveryInfo)(nil),         // 9: justeat.NewOrderForRestaurant.DeliveryInfo
+	(*NewOrderForRestaurant_OrderItemDetail)(nil),      // 10: justeat.NewOrderForRestaurant.OrderItemDetail
+	(*NewOrderForRestaurant_SubItemDetail)(nil),        // 11: justeat.NewOrderForRestaurant.SubItemDetail
+	(*NewOrderForRestaurant_PriceBreakdownDetail)(nil), // 12: justeat.NewOrderForRestaurant.PriceBreakdownDetail
+	(*NewOrderForRestaurant_ChargeDetail)(nil),         // 13: justeat.NewOrderForRestaurant.ChargeDetail
+	(*NewOrderForRestaurant_DiscountDetail)(nil),       // 14: justeat.NewOrderForRestaurant.DiscountDetail
+	(*NewOrderForRestaurant_TipDetail)(nil),            // 15: justeat.NewOrderForRestaurant.TipDetail
+	(*NewOrderForRestaurant_CustomerNotesDetail)(nil),  // 16: justeat.NewOrderForRestaurant.CustomerNotesDetail
+	(*NewOrderForRestaurant_RestrictionsDetails)(nil),  // 17: justeat.NewOrderForRestaurant.RestrictionsDetails
+	(*NewOrderForRestaurant_Location)(nil),             // 18: justeat.NewOrderForRestaurant.Location
+	(*NewOrderForRestaurant_Address)(nil),              // 19: justeat.NewOrderForRestaurant.Address
+	(*NewOrderForRestaurant_FulfilmentTime)(nil),       // 20: justeat.NewOrderForRestaurant.FulfilmentTime
+	(*NewOrderForRestaurant_PhoneNumber)(nil),          // 21: justeat.NewOrderForRestaurant.PhoneNumber
+	(*NewOrderForRestaurant_Items)(nil),                // 22: justeat.NewOrderForRestaurant.Items
 }
 var file_justeat_new_order_for_restaurant_proto_depIdxs = []int32{
-	2,  // 0: justeat.NewOrderForRestaurant.status:type_name -> justeat.NewOrderForRestaurant.Status
-	3,  // 1: justeat.NewOrderForRestaurant.restaurant:type_name -> justeat.NewOrderForRestaurant.RestaurantDetail
-	4,  // 2: justeat.NewOrderForRestaurant.payment:type_name -> justeat.NewOrderForRestaurant.PaymentDetail
-	5,  // 3: justeat.NewOrderForRestaurant.customer:type_name -> justeat.NewOrderForRestaurant.CustomerDetail
-	6,  // 4: justeat.NewOrderForRestaurant.fulfilment:type_name -> justeat.NewOrderForRestaurant.FulfilmentDetail
-	9,  // 5: justeat.NewOrderForRestaurant.items:type_name -> justeat.NewOrderForRestaurant.OrderItemDetail
-	11, // 6: justeat.NewOrderForRestaurant.price_breakdown:type_name -> justeat.NewOrderForRestaurant.PriceBreakdownDetail
-	15, // 7: justeat.NewOrderForRestaurant.customer_notes:type_name -> justeat.NewOrderForRestaurant.CustomerNotesDetail
-	16, // 8: justeat.NewOrderForRestaurant.restrictions:type_name -> justeat.NewOrderForRestaurant.RestrictionsDetails
+	3,  // 0: justeat.NewOrderForRestaurant.status:type_name -> justeat.NewOrderForRestaurant.Status
+	4,  // 1: justeat.NewOrderForRestaurant.restaurant:type_name -> justeat.NewOrderForRestaurant.RestaurantDetail
+	5,  // 2: justeat.NewOrderForRestaurant.payment:type_name -> justeat.NewOrderForRestaurant.PaymentDetail
+	6,  // 3: justeat.NewOrderForRestaurant.customer:type_name -> justeat.NewOrderForRestaurant.CustomerDetail
+	7,  // 4: justeat.NewOrderForRestaurant.fulfilment:type_name -> justeat.NewOrderForRestaurant.FulfilmentDetail
+	10, // 5: justeat.NewOrderForRestaurant.items:type_name -> justeat.NewOrderForRestaurant.OrderItemDetail
+	12, // 6: justeat.NewOrderForRestaurant.price_breakdown:type_name -> justeat.NewOrderForRestaurant.PriceBreakdownDetail
+	16, // 7: justeat.NewOrderForRestaurant.customer_notes:type_name -> justeat.NewOrderForRestaurant.CustomerNotesDetail
+	17, // 8: justeat.NewOrderForRestaurant.restrictions:type_name -> justeat.NewOrderForRestaurant.RestrictionsDetails
 	1,  // 9: justeat.NewOrderForRestaurant.discounts:type_name -> justeat.OfferDetail
-	21, // 10: justeat.NewOrderForRestaurant.PaymentDetail.lines:type_name -> justeat.NewOrderForRestaurant.Items
-	20, // 11: justeat.NewOrderForRestaurant.CustomerDetail.phone_number:type_name -> justeat.NewOrderForRestaurant.PhoneNumber
-	9,  // 12: justeat.NewOrderForRestaurant.CustomerDetail.items:type_name -> justeat.NewOrderForRestaurant.OrderItemDetail
-	19, // 13: justeat.NewOrderForRestaurant.FulfilmentDetail.time:type_name -> justeat.NewOrderForRestaurant.FulfilmentTime
-	7,  // 14: justeat.NewOrderForRestaurant.FulfilmentDetail.dine_in_info:type_name -> justeat.NewOrderForRestaurant.DineInInfo
-	8,  // 15: justeat.NewOrderForRestaurant.FulfilmentDetail.delivery_info:type_name -> justeat.NewOrderForRestaurant.DeliveryInfo
-	17, // 16: justeat.NewOrderForRestaurant.DeliveryInfo.location:type_name -> justeat.NewOrderForRestaurant.Location
-	10, // 17: justeat.NewOrderForRestaurant.OrderItemDetail.items:type_name -> justeat.NewOrderForRestaurant.SubItemDetail
+	22, // 10: justeat.NewOrderForRestaurant.PaymentDetail.lines:type_name -> justeat.NewOrderForRestaurant.Items
+	21, // 11: justeat.NewOrderForRestaurant.CustomerDetail.phone_number:type_name -> justeat.NewOrderForRestaurant.PhoneNumber
+	10, // 12: justeat.NewOrderForRestaurant.CustomerDetail.items:type_name -> justeat.NewOrderForRestaurant.OrderItemDetail
+	20, // 13: justeat.NewOrderForRestaurant.FulfilmentDetail.time:type_name -> justeat.NewOrderForRestaurant.FulfilmentTime
+	8,  // 14: justeat.NewOrderForRestaurant.FulfilmentDetail.dine_in_info:type_name -> justeat.NewOrderForRestaurant.DineInInfo
+	9,  // 15: justeat.NewOrderForRestaurant.FulfilmentDetail.delivery_info:type_name -> justeat.NewOrderForRestaurant.DeliveryInfo
+	18, // 16: justeat.NewOrderForRestaurant.DeliveryInfo.location:type_name -> justeat.NewOrderForRestaurant.Location
+	11, // 17: justeat.NewOrderForRestaurant.OrderItemDetail.items:type_name -> justeat.NewOrderForRestaurant.SubItemDetail
 	1,  // 18: justeat.NewOrderForRestaurant.OrderItemDetail.discounts:type_name -> justeat.OfferDetail
-	10, // 19: justeat.NewOrderForRestaurant.SubItemDetail.items:type_name -> justeat.NewOrderForRestaurant.SubItemDetail
-	12, // 20: justeat.NewOrderForRestaurant.PriceBreakdownDetail.charges:type_name -> justeat.NewOrderForRestaurant.ChargeDetail
-	13, // 21: justeat.NewOrderForRestaurant.PriceBreakdownDetail.discounts:type_name -> justeat.NewOrderForRestaurant.DiscountDetail
-	14, // 22: justeat.NewOrderForRestaurant.PriceBreakdownDetail.tips:type_name -> justeat.NewOrderForRestaurant.TipDetail
-	18, // 23: justeat.NewOrderForRestaurant.Location.address:type_name -> justeat.NewOrderForRestaurant.Address
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	2,  // 19: justeat.NewOrderForRestaurant.OrderItemDetail.sub:type_name -> justeat.Sub
+	11, // 20: justeat.NewOrderForRestaurant.SubItemDetail.items:type_name -> justeat.NewOrderForRestaurant.SubItemDetail
+	13, // 21: justeat.NewOrderForRestaurant.PriceBreakdownDetail.charges:type_name -> justeat.NewOrderForRestaurant.ChargeDetail
+	14, // 22: justeat.NewOrderForRestaurant.PriceBreakdownDetail.discounts:type_name -> justeat.NewOrderForRestaurant.DiscountDetail
+	15, // 23: justeat.NewOrderForRestaurant.PriceBreakdownDetail.tips:type_name -> justeat.NewOrderForRestaurant.TipDetail
+	19, // 24: justeat.NewOrderForRestaurant.Location.address:type_name -> justeat.NewOrderForRestaurant.Address
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_justeat_new_order_for_restaurant_proto_init() }
@@ -1862,7 +1925,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_Status); i {
+			switch v := v.(*Sub); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1874,7 +1937,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_RestaurantDetail); i {
+			switch v := v.(*NewOrderForRestaurant_Status); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1886,7 +1949,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_PaymentDetail); i {
+			switch v := v.(*NewOrderForRestaurant_RestaurantDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1898,7 +1961,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_CustomerDetail); i {
+			switch v := v.(*NewOrderForRestaurant_PaymentDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1910,7 +1973,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_FulfilmentDetail); i {
+			switch v := v.(*NewOrderForRestaurant_CustomerDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1922,7 +1985,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_DineInInfo); i {
+			switch v := v.(*NewOrderForRestaurant_FulfilmentDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1934,7 +1997,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_DeliveryInfo); i {
+			switch v := v.(*NewOrderForRestaurant_DineInInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1946,7 +2009,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_OrderItemDetail); i {
+			switch v := v.(*NewOrderForRestaurant_DeliveryInfo); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1958,7 +2021,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_SubItemDetail); i {
+			switch v := v.(*NewOrderForRestaurant_OrderItemDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1970,7 +2033,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_PriceBreakdownDetail); i {
+			switch v := v.(*NewOrderForRestaurant_SubItemDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1982,7 +2045,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_ChargeDetail); i {
+			switch v := v.(*NewOrderForRestaurant_PriceBreakdownDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1994,7 +2057,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_DiscountDetail); i {
+			switch v := v.(*NewOrderForRestaurant_ChargeDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2006,7 +2069,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_TipDetail); i {
+			switch v := v.(*NewOrderForRestaurant_DiscountDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2018,7 +2081,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_CustomerNotesDetail); i {
+			switch v := v.(*NewOrderForRestaurant_TipDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2030,7 +2093,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_RestrictionsDetails); i {
+			switch v := v.(*NewOrderForRestaurant_CustomerNotesDetail); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2042,7 +2105,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_Location); i {
+			switch v := v.(*NewOrderForRestaurant_RestrictionsDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2054,7 +2117,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_Address); i {
+			switch v := v.(*NewOrderForRestaurant_Location); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2066,7 +2129,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_FulfilmentTime); i {
+			switch v := v.(*NewOrderForRestaurant_Address); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2078,7 +2141,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*NewOrderForRestaurant_PhoneNumber); i {
+			switch v := v.(*NewOrderForRestaurant_FulfilmentTime); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2090,6 +2153,18 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			}
 		}
 		file_justeat_new_order_for_restaurant_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*NewOrderForRestaurant_PhoneNumber); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_justeat_new_order_for_restaurant_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*NewOrderForRestaurant_Items); i {
 			case 0:
 				return &v.state
@@ -2108,7 +2183,7 @@ func file_justeat_new_order_for_restaurant_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_justeat_new_order_for_restaurant_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   22,
+			NumMessages:   23,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

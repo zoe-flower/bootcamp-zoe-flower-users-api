@@ -10,7 +10,7 @@ on:
 
 jobs:
   tool_rollback:
-    uses: flypay/actions-service-tool/.github/workflows/rollback.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/rollback.yml@v1.1.5
     with:
       gha_deploy_role: ${{ vars.PRODUCTION_GHA_DEPLOY_ROLE }}
       platform_environment: "production"

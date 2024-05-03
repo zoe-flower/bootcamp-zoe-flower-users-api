@@ -32,7 +32,7 @@
     },
     "team": "jetc-tooling",
     "alerts": [],
-    "dev_tool_version": "4.117.0",
+    "dev_tool_version": "4.124.0",
     "capability_flow": [
         "Undefined"
     ],
@@ -40,5 +40,6 @@
     "production_traffic": false,
     "use_gha": true,
     "is_ghe": false,
-    "disable_sentry": false
+    "disable_sentry": false,
+    "actions_service_tool_version": "v1.1.5"
 }

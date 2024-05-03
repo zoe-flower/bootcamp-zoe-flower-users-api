@@ -7,6 +7,8 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+// RANDOM TEST COMMENT
+
 // service requires a http endpoint to communicate
 // emits an event so needs a producer
 // producer and logger is passed to the handler to use

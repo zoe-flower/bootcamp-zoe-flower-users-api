@@ -35,6 +35,8 @@ const (
 	defaultConsumerLagTimePeriod       = "2m"
 
 	defaultGoMemLimit = 100
+
+	defaultActionsServiceTool = "v1.1.5"
 )
 
 const (
@@ -51,26 +53,27 @@ const (
 )
 
 type Definition struct {
-	Command                 string
-	Name                    string
-	URL                     string
-	HTTPService             bool
-	HTTPClient              bool
-	TestIntegration         bool
-	ProductionTraffic       bool
-	EventBus                types.EventBus
-	Databases               []types.DatabaseResource
-	CompositeDatabases      []types.DatabaseResource
-	ObjectStores            []types.ObjectStorageResource
-	Assets                  []types.AssetResource
-	Team                    string
-	GoVersion               string
-	Tier                    string
-	DockerGoVersion         string
-	UseGha                  bool
-	IsGhe                   bool
-	DisableSentry           bool
-	ExtraDockerDependencies string
+	Command                   string
+	Name                      string
+	URL                       string
+	HTTPService               bool
+	HTTPClient                bool
+	TestIntegration           bool
+	ProductionTraffic         bool
+	EventBus                  types.EventBus
+	Databases                 []types.DatabaseResource
+	CompositeDatabases        []types.DatabaseResource
+	ObjectStores              []types.ObjectStorageResource
+	Assets                    []types.AssetResource
+	Team                      string
+	GoVersion                 string
+	Tier                      string
+	DockerGoVersion           string
+	UseGha                    bool
+	IsGhe                     bool
+	DisableSentry             bool
+	ExtraDockerDependencies   string
+	ActionsServiceToolVersion string
 }
 
 func (d Definition) HasActiveStores() bool {
@@ -304,6 +307,7 @@ func ApplyDefaults(serviceInput *types.ServiceInput) {
 			serviceInput.EventBus.ConsumesTopics[i].ConsumerLagAlert.TimePeriod = defaultConsumerLagTimePeriod
 		}
 	}
+	serviceInput.ActionsServiceToolVersion = defaultActionsServiceTool
 }
 
 func ApplyFallbacks(serviceInput *types.ServiceInput, fallback map[string]interface{}) {

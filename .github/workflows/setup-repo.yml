@@ -7,14 +7,14 @@ on:
 
 jobs:
   setup-oidc-sub:
-    uses: flypay/actions-service-tool/.github/workflows/setup-oidc-sub.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/setup-oidc-sub.yml@v1.1.5
   setup-webhooks:
-    uses: flypay/actions-service-tool/.github/workflows/setup-webhooks.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/setup-webhooks.yml@v1.1.5
     with:
       USE_GHA: true
     secrets: inherit
   setup-branch-rules-trigger:
-    uses: flypay/actions-service-tool/.github/workflows/setup-branch-rules-trigger.yml@v1.0.8
+    uses: flypay/actions-service-tool/.github/workflows/setup-branch-rules-trigger.yml@v1.1.5
     with:
       USE_GHA: true
       TARGET_BRANCH: main

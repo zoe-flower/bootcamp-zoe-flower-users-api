@@ -2,7 +2,7 @@
 <!-- Documentation: https://github.com/flypay/go-kit/blob/master/docs/readme-gen/README.md -->
 # bootcamp-zoe-flower-users-api
 
-[![merged status](https://github.com/flypay/bootcamp-zoe-flower-users-api/actions/workflows/release.yml/badge.svg)](https://github.com/flypay/bootcamp-zoe-flower-users-api/actions/workflows/release.yml) [![Maintainer](https://img.shields.io/badge/team-jetc--tooling-informational)](https://github.com/orgs/flypay/teams/jetc-tooling/members) [![Dev-tool Version](https://img.shields.io/badge/dev--tool-4.117.0-blueviolet)](https://github.com/flypay/go-kit/releases/tag/v4.117.0) [![Tier](https://img.shields.io/badge/tier-Undefined-inactive)](https://github.com/flypay/go-kit/tree/master/docs/tiers) [![Capability](https://img.shields.io/badge/capability-unknown-blue)](https://github.com/flypay/go-kit/tree/master/docs/capabilities)
+[![merged status](https://github.com/flypay/bootcamp-zoe-flower-users-api/actions/workflows/release.yml/badge.svg)](https://github.com/flypay/bootcamp-zoe-flower-users-api/actions/workflows/release.yml) [![Maintainer](https://img.shields.io/badge/team-jetc--tooling-informational)](https://github.com/orgs/flypay/teams/jetc-tooling/members) [![Dev-tool Version](https://img.shields.io/badge/dev--tool-4.124.0-blueviolet)](https://github.com/flypay/go-kit/releases/tag/v4.124.0) [![Tier](https://img.shields.io/badge/tier-Undefined-inactive)](https://github.com/flypay/go-kit/tree/master/docs/tiers) [![Capability](https://img.shields.io/badge/capability-unknown-blue)](https://github.com/flypay/go-kit/tree/master/docs/capabilities)
 
 ## Quick Links
 

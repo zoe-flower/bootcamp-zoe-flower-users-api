@@ -32,23 +32,24 @@ type Service struct {
 }
 
 type ServiceInput struct {
-	Name           string       `json:"name"`
-	HTTPS          HTTPS        `json:"https"`
-	HTTPClient     bool         `json:"http_client"`
-	EventBus       EventBus     `json:"event_bus"`
-	Resources      Resources    `json:"resources"`
-	EnvVars        EnvVars      `json:"env_vars"`
-	PodResources   PodResources `json:"pod_resources,omitempty"` // deprecated. To be removed in the next version
-	Tests          ServiceTests `json:"tests"`
-	Team           string       `json:"team"`
-	Alerts         []Alert      `json:"alerts"`
-	DevToolVersion string       `json:"dev_tool_version"`
-	Capability     interface{}  `json:"capability_flow"`
-	Tier           string       `json:"tier"`
-	Production     bool         `json:"production_traffic"`
-	UseGha         bool         `json:"use_gha"`
-	IsGhe          bool         `json:"is_ghe"`
-	DisableSentry  bool         `json:"disable_sentry"`
+	Name                      string       `json:"name"`
+	HTTPS                     HTTPS        `json:"https"`
+	HTTPClient                bool         `json:"http_client"`
+	EventBus                  EventBus     `json:"event_bus"`
+	Resources                 Resources    `json:"resources"`
+	EnvVars                   EnvVars      `json:"env_vars"`
+	PodResources              PodResources `json:"pod_resources,omitempty"` // deprecated. To be removed in the next version
+	Tests                     ServiceTests `json:"tests"`
+	Team                      string       `json:"team"`
+	Alerts                    []Alert      `json:"alerts"`
+	DevToolVersion            string       `json:"dev_tool_version"`
+	Capability                interface{}  `json:"capability_flow"`
+	Tier                      string       `json:"tier"`
+	Production                bool         `json:"production_traffic"`
+	UseGha                    bool         `json:"use_gha"`
+	IsGhe                     bool         `json:"is_ghe"`
+	DisableSentry             bool         `json:"disable_sentry"`
+	ActionsServiceToolVersion string       `json:"actions_service_tool_version"`
 }
 
 type EventBus struct {
