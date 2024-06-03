@@ -7,8 +7,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-
-// RANDOM TEST COMMENT 2.0
+// 3pm 03/06/24 test
 
 // service requires a http endpoint to communicate
 // emits an event so needs a producer
